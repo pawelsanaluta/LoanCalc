@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Loan payment calculator</title>
+</head>
+<body>
+Enter loan parameters:<br>
+<br>
+<form action="/">
+    <label for="amount">Loan amount:</label><br>
+    <input type="text" id="amount" name="amount"><br>
+    <label for="rate">Interest rate:</label><br>
+    <input type="text" id="rate" name="rate"><br>
+    <label for="payments">Number of monthly payments:</label><br>
+    <input type="number" id="payments" name="payments"><br><br>
+    <button>Calculate!</button><br><br>
+</form>
+Estimated monthly payment is:
+<p th:text="${result}"></p>
+
+</body>
+</html>
