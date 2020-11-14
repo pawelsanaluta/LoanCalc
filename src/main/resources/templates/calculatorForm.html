@@ -3,25 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Loan payment calculator</title>
+    <link th:href="@{/styles/style.css}" rel="stylesheet"/>
 </head>
 <body>
-<header>Loan payment calculator</header>
-
-<br>Enter loan parameters:<br>
-<br>
-<form th:object="${loanData}" action="/" method="post">
-    <label for="amount">Loan amount:</label><br>
-    <input th:field="*{loanAmount}" id="amount"><br>
-    <label for="rate">Interest rate:</label><br>
-    <input th:field="*{interestRate}" id="rate"><br>
-    <label for="payments">Number of monthly payments:</label><br>
-    <input th:field="*{paymentQuantity}" id="payments"><br><br>
-    <button>Calculate!</button>
-</form>
-
-<hr>
-
-<p th:if="${result} != null" th:text="'Estimated monthly payment is: ' + ${result}">
-
+<div class="container">
+    <header>Loan payment calculator</header>
+    <h1>Enter loan parameters below</h1>
+    <form th:object="${loanData}" action="/" method="post">
+        <label for="amount">Loan amount</label><br>
+        <input th:field="*{loanAmount}" id="amount" name="amount"><br>
+        <label for="rate">Interest rate</label><br>
+        <input th:field="*{interestRate}" id="rate" name="rate"><br>
+        <label for="payments">Number of monthly payments</label><br>
+        <input th:field="*{paymentQuantity}" id="payments" name="payments"><br>
+        <button>Calculate!</button>
+    </form>
+    <p th:if="${result} != null" th:text="'Estimated monthly payment is: ' + ${result}">
+</div>
 </body>
 </html>
