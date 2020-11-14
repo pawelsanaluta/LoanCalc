@@ -12,6 +12,9 @@ public class LoanDTO {
         this.paymentQuantity = paymentQuantity;
     }
 
+    public LoanDTO() {
+    }
+
     public String getLoanAmount() {
         return loanAmount;
     }
@@ -22,5 +25,17 @@ public class LoanDTO {
 
     public Integer getPaymentQuantity() {
         return paymentQuantity;
+    }
+
+    public void setLoanAmount(String loanAmount) {
+        this.loanAmount = loanAmount;
+    }
+
+    public void setInterestRate(String interestRate) {
+        this.interestRate = interestRate;
+    }
+
+    public void setPaymentQuantity(Integer paymentQuantity) {
+        this.paymentQuantity = paymentQuantity;
     }
 }

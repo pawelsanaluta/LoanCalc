@@ -1,6 +1,7 @@
 package com.ps.creditcalc;
 
 import java.math.BigDecimal;
+
 /*
 Loan class that defines amount of a loan, its interest rate and quantity of monthly payments (monthly duration).
  */
@@ -14,6 +15,9 @@ public class Loan {
         this.loanAmount = loanAmount;
         this.interestRate = interestRate;
         this.paymentQuantity = paymentQuantity;
+    }
+
+    public Loan() {
     }
 
     public void setLoanAmount(BigDecimal loanAmount) {
@@ -38,5 +42,21 @@ public class Loan {
 
     public Integer getPaymentQuantity() {
         return this.paymentQuantity;
+    }
+
+    public static LoanDTO toLoanDTO(Loan loan) {
+        final LoanDTO loanDTO = new LoanDTO();
+        loanDTO.setLoanAmount(loan.getLoanAmount().toString());
+        loanDTO.setInterestRate(loan.getInterestRate().toString());
+        loanDTO.setPaymentQuantity(loan.getPaymentQuantity());
+        return loanDTO;
+    }
+
+    public static Loan apply(LoanDTO loanDTO) {
+        final Loan loan = new Loan();
+        loan.setLoanAmount(new BigDecimal(loanDTO.getLoanAmount()));
+        loan.setInterestRate(new BigDecimal(loanDTO.getInterestRate()));
+        loan.setPaymentQuantity(loanDTO.getPaymentQuantity());
+        return loan;
     }
 }
