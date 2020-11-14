@@ -44,14 +44,6 @@ public class Loan {
         return this.paymentQuantity;
     }
 
-    public static LoanDTO toLoanDTO(Loan loan) {
-        final LoanDTO loanDTO = new LoanDTO();
-        loanDTO.setLoanAmount(loan.getLoanAmount().toString());
-        loanDTO.setInterestRate(loan.getInterestRate().toString());
-        loanDTO.setPaymentQuantity(loan.getPaymentQuantity());
-        return loanDTO;
-    }
-
     public static Loan apply(LoanDTO loanDTO) {
         final Loan loan = new Loan();
         loan.setLoanAmount(new BigDecimal(loanDTO.getLoanAmount()));

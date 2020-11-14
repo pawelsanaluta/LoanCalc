@@ -19,7 +19,7 @@ public class CreditcalcApplication {
 /*TODO
 1. historical results
 2. tips how to enter values
-3. interest rate in percentage value
+3. validators
 4. footer
 5. loan details, interest cost, commission
 */

@@ -19,6 +19,7 @@
         <button>Calculate!</button>
     </form>
     <p th:if="${result} != null" th:text="'Estimated monthly payment is: ' + ${result}">
+    <p th:if="${cost} != null" th:text="'Estimated loan cost is: ' + ${cost}">
 </div>
 </body>
 </html>

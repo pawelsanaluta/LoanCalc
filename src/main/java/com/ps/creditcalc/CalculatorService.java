@@ -18,7 +18,7 @@ public class CalculatorService {
         RoundingMode rm = RoundingMode.HALF_UP;
         MathContext mc = new MathContext(10, rm);
 
-        BigDecimal monthlyInterestRate = loan.getInterestRate().divide(BigDecimal.valueOf(12), 8, rm);
+        BigDecimal monthlyInterestRate = loan.getInterestRate().divide(BigDecimal.valueOf(1200), 8, rm);
         for (int i = 1; i <= loan.getPaymentQuantity(); i++) {
             BigDecimal power = (monthlyInterestRate.add(BigDecimal.valueOf(1))).pow(-i, mc);
             divisor = divisor.add(power);
@@ -30,5 +30,11 @@ public class CalculatorService {
         }
 
         return payment.toString();
+    }
+
+    public String calculateLoanCost(LoanDTO loanDTO) {
+        final String payment = calculatePayment(loanDTO);
+        BigDecimal cost = new BigDecimal(payment).multiply(new BigDecimal(loanDTO.getPaymentQuantity())).subtract(new BigDecimal(loanDTO.getLoanAmount()));
+        return cost.toString();
     }
 }

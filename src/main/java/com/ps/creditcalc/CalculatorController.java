@@ -22,8 +22,10 @@ public class CalculatorController {
     @PostMapping("/")
     public String calculate(LoanDTO loanDto, Model model) {
         String result = calculatorService.calculatePayment(loanDto);
+        String cost = calculatorService.calculateLoanCost(loanDto);
         model.addAttribute("loanData", loanDto);
         model.addAttribute("result", result);
+        model.addAttribute("cost", cost);
         return "calculatorForm";
     }
 }
