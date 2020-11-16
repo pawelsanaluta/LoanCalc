@@ -9,12 +9,25 @@
 <div class="container">
     <header>Loan payment calculator</header>
     <h1>Enter loan parameters below</h1>
+
     <form th:object="${loanData}" action="/" method="post">
-        <label for="amount">Loan amount</label><br>
+        <label for="amount">
+            <div class="tooltip">Loan amount
+                <span class="tooltiptext">Loan amount</span>
+            </div>
+        </label><br>
         <input th:field="*{loanAmount}" id="amount" name="amount"><br>
-        <label for="rate">Interest rate</label><br>
+        <label for="rate">
+            <div class="tooltip">Interest rate
+                <span class="tooltiptext">Interest rate in percentage format, e.g. enter 7.2 for 7.2%</span>
+            </div>
+        </label><br>
         <input th:field="*{interestRate}" id="rate" name="rate"><br>
-        <label for="payments">Number of monthly payments</label><br>
+        <label for="payments">
+            <div class="tooltip">Number of monthly payments
+                <span class="tooltiptext">Duration in months, e.g. enter 24 for 2 year loan</span>
+            </div>
+        </label><br>
         <input th:field="*{paymentQuantity}" id="payments" name="payments"><br>
         <button>Calculate!</button>
     </form>
@@ -23,16 +36,14 @@
         <b th:text="${result}"></b></p>
     <p th:if="${cost != null}">
         Estimated loan cost is:
-    <b th:text="${cost}"></b></p>
-        <!--    results list-->
+        <b th:text="${cost}"></b></p>
+    <!--    results list-->
     <hr>
     <p th:if="${resultsList != null}">
         Previous calculations:</p>
-    <ul style="list-style-type: none">
-        <li th:each="item : ${resultsList}" th:text="${item}"></li>
+    <ul style="list-style: none; text-align: center; padding-left: 0">
+        <li style="" th:each="item : ${resultsList}" th:text="${item}"></li>
     </ul>
-
-
 </div>
 
 </body>
