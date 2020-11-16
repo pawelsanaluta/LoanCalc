@@ -12,20 +12,24 @@ public class CalculatorController {
     @Autowired
     private CalculatorService calculatorService;
 
+    @Autowired
+    private ResultsCache resultsCache;
+
     @GetMapping("/")
     public String showCalculator(Model model) {
-        LoanDTO loanDto = new LoanDTO();
-        model.addAttribute("loanData", loanDto);
-        return "calculatorForm";
+        LoanDTO loanDTO = new LoanDTO();
+        model.addAttribute("loanData", loanDTO);
+        return "index";
     }
 
     @PostMapping("/")
-    public String calculate(LoanDTO loanDto, Model model) {
-        String result = calculatorService.calculatePayment(loanDto);
-        String cost = calculatorService.calculateLoanCost(loanDto);
-        model.addAttribute("loanData", loanDto);
+    public String calculate(LoanDTO loanDTO, Model model) {
+        model.addAttribute("loanData", loanDTO);
+        String result = calculatorService.calculatePayment(loanDTO);
+        String cost = calculatorService.calculateLoanCost(loanDTO);
+        model.addAttribute("resultsList", resultsCache.addAndShowResults(loanDTO, result, cost));
         model.addAttribute("result", result);
         model.addAttribute("cost", cost);
-        return "calculatorForm";
+        return "index";
     }
 }

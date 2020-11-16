@@ -18,8 +18,22 @@
         <input th:field="*{paymentQuantity}" id="payments" name="payments"><br>
         <button>Calculate!</button>
     </form>
-    <p th:if="${result} != null" th:text="'Estimated monthly payment is: ' + ${result}">
-    <p th:if="${cost} != null" th:text="'Estimated loan cost is: ' + ${cost}">
+    <p th:if="${result != null}">
+        Estimated monthly payment is:
+        <b th:text="${result}"></b></p>
+    <p th:if="${cost != null}">
+        Estimated loan cost is:
+    <b th:text="${cost}"></b></p>
+        <!--    results list-->
+    <hr>
+    <p th:if="${resultsList != null}">
+        Previous calculations:</p>
+    <ul style="list-style-type: none">
+        <li th:each="item : ${resultsList}" th:text="${item}"></li>
+    </ul>
+
+
 </div>
+
 </body>
 </html>
