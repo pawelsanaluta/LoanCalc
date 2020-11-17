@@ -48,7 +48,7 @@ public class Loan {
         final Loan loan = new Loan();
         loan.setLoanAmount(new BigDecimal(loanDTO.getLoanAmount()));
         loan.setInterestRate(new BigDecimal(loanDTO.getInterestRate()));
-        loan.setPaymentQuantity(loanDTO.getPaymentQuantity());
+        loan.setPaymentQuantity(Integer.parseInt(loanDTO.getPaymentQuantity()));
         return loan;
     }
 }

@@ -26,4 +26,9 @@ public class ResultsCache {
         Collections.reverse(results);
         return results;
     }
+
+    public List<String> showResults() {
+        return results;
+    }
+
 }

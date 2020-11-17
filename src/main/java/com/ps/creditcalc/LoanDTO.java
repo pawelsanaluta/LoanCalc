@@ -4,9 +4,9 @@ public class LoanDTO {
 
     private String loanAmount;
     private String interestRate;
-    private Integer paymentQuantity;
+    private String paymentQuantity;
 
-    public LoanDTO(String loanAmount, String interestRate, Integer paymentQuantity) {
+    public LoanDTO(String loanAmount, String interestRate, String paymentQuantity) {
         this.loanAmount = loanAmount;
         this.interestRate = interestRate;
         this.paymentQuantity = paymentQuantity;
@@ -23,7 +23,7 @@ public class LoanDTO {
         return interestRate;
     }
 
-    public Integer getPaymentQuantity() {
+    public String getPaymentQuantity() {
         return paymentQuantity;
     }
 
@@ -35,7 +35,7 @@ public class LoanDTO {
         this.interestRate = interestRate;
     }
 
-    public void setPaymentQuantity(Integer paymentQuantity) {
+    public void setPaymentQuantity(String paymentQuantity) {
         this.paymentQuantity = paymentQuantity;
     }
 }

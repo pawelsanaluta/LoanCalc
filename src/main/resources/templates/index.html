@@ -1,34 +1,37 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Loan payment calculator</title>
     <link th:href="@{/styles/style.css}" rel="stylesheet"/>
 </head>
 <body>
-<div class="container">
-    <header>Loan payment calculator</header>
-    <h1>Enter loan parameters below</h1>
+<div th:replace="/fragments/header :: headerFragment"></div>
 
+<div class="container">
+    <h1>Enter loan parameters below</h1>
     <form th:object="${loanData}" action="/" method="post">
         <label for="amount">
             <div class="tooltip">Loan amount
-                <span class="tooltiptext">Loan amount</span>
+                <span class="tooltiptext">Loan amount between 1000 and 9999999</span>
             </div>
         </label><br>
-        <input th:field="*{loanAmount}" id="amount" name="amount"><br>
+        <input th:field="*{loanAmount}" type="number" id="amount" name="amount"><br>
+        <p style="font-size: 0.75em; font-weight: bold" th:if="${loanAmountValidation}" th:text="${loanAmountValidation}"></p>
         <label for="rate">
             <div class="tooltip">Interest rate
-                <span class="tooltiptext">Interest rate in percentage format, e.g. enter 7.2 for 7.2%</span>
+                <span class="tooltiptext">Interest rate in percentage format, e.g. enter 7,2 for 7,2%</span>
             </div>
         </label><br>
-        <input th:field="*{interestRate}" id="rate" name="rate"><br>
+        <input th:field="*{interestRate}" type="number" step="0.01" id="rate" name="rate"><br>
+        <p style="font-size: 0.75em; font-weight: bold" th:if="${interestRate}" th:text="${interestRate}"></p>
         <label for="payments">
             <div class="tooltip">Number of monthly payments
                 <span class="tooltiptext">Duration in months, e.g. enter 24 for 2 year loan</span>
             </div>
         </label><br>
-        <input th:field="*{paymentQuantity}" id="payments" name="payments"><br>
+        <input th:field="*{paymentQuantity}" type="number" id="payments" name="payments"><br>
+        <p style="font-size: 0.75em; font-weight: bold" th:if="${payments}" th:text="${payments}"></p>
         <button>Calculate!</button>
     </form>
     <p th:if="${result != null}">
@@ -39,12 +42,11 @@
         <b th:text="${cost}"></b></p>
     <!--    results list-->
     <hr>
-    <p th:if="${resultsList != null}">
+    <p th:if="${resultsList != null && resultsList.size() != 0}">
         Previous calculations:</p>
     <ul style="list-style: none; text-align: center; padding-left: 0">
         <li style="" th:each="item : ${resultsList}" th:text="${item}"></li>
     </ul>
 </div>
-
 </body>
 </html>

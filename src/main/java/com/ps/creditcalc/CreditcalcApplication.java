@@ -17,8 +17,7 @@ public class CreditcalcApplication {
 }
 
 /*TODO
-3. validators
-4. footer
+1. tests
 6. schedule creation, saving to file
 */
 
