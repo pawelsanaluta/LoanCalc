@@ -33,8 +33,10 @@ public class CalculatorService {
     }
 
     public String calculateLoanCost(LoanDTO loanDTO) {
+
         final String payment = calculatePayment(loanDTO);
         BigDecimal cost = new BigDecimal(payment).multiply(new BigDecimal(loanDTO.getPaymentQuantity())).subtract(new BigDecimal(loanDTO.getLoanAmount()));
+
         return cost.toString();
     }
 }

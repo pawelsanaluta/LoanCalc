@@ -2,7 +2,6 @@ package com.ps.creditcalc;
 
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,17 +17,18 @@ public class ResultsCache {
                 "%, duration: " + loanDTO.getPaymentQuantity() +
                 " months, monthly payment: " + result +
                 ", loan cost: " + cost;
+
         Collections.reverse(results);
         results.add(entry);
-        if(results.size() > 3) {
+        if (results.size() > 3) {
             results.remove(0);
         }
         Collections.reverse(results);
+
         return results;
     }
 
     public List<String> showResults() {
         return results;
     }
-
 }

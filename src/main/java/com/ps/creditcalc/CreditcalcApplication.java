@@ -20,4 +20,3 @@ public class CreditcalcApplication {
 1. tests
 6. schedule creation, saving to file
 */
-

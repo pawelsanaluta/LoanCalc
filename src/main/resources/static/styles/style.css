@@ -2,13 +2,7 @@ body {
     text-align: center;
     background-color: ghostwhite;
     font-family: Verdana, Geneva, sans-serif;
-
-}
-
-.container {
-    height: 800px;
-    width: 600px;
-    background-color: ghostwhite;
+    margin: 0;
 }
 
 div {
@@ -21,15 +15,6 @@ h1 {
     font-weight: normal;
 }
 
-.header {
-    font-size: 1.5em;
-    background-color: tomato;
-    display: flex;
-    align-items: center;
-    height: 60px;
-    padding-left: 100px;
-}
-
 input {
     width: 35%;
     padding: 12px 20px;
@@ -37,21 +22,39 @@ input {
     box-sizing: border-box;
 }
 
+.container {
+    height: 800px;
+    width: 600px;
+    background-color: ghostwhite;
+}
+
+.header {
+    font-size: 1.5em;
+    background-color: steelblue;
+    display: flex;
+    align-items: center;
+    height: 60px;
+    padding-left: 40px;
+    color: aliceblue;
+    margin-bottom: 40px;
+}
+
 button {
     background-color: white;
-    border: 2px solid tomato;
+    border: 2px solid steelblue;
     padding: 16px 32px;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
     font-weight: bold;
+    color: steelblue;
     margin: 4px 2px;
     transition-duration: 0.5s;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: tomato;
+    background-color: steelblue;
     color: white;
 }
 
@@ -65,11 +68,12 @@ button:hover {
 .tooltip .tooltiptext {
     visibility: hidden;
     width: 200px;
-    background-color: black;
+    background-color: steelblue;
     color: #fff;
     text-align: center;
     padding: 5px 0;
-    border-radius: 6px;
+    border-radius: 5px;
+    font-size: 0.75em;
 
     /* Position the tooltip text - see examples below! */
     position: absolute;

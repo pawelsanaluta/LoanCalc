@@ -22,27 +22,31 @@ public class CalculatorController {
 
     @GetMapping("/")
     public String showCalculator(Model model) {
+
         LoanDTO loanDTO = new LoanDTO();
         model.addAttribute("loanData", loanDTO);
         model.addAttribute("resultsList", resultsCache.showResults());
+
         return "index";
     }
 
     @PostMapping("/")
     public String calculate(LoanDTO loanDTO, Model model) {
+
         final Map<String, String> exceptionMap = validationService.validateData(loanDTO);
+        model.addAttribute("loanData", loanDTO);
+
         if(exceptionMap.isEmpty()) {
-            model.addAttribute("loanData", loanDTO);
             String result = calculatorService.calculatePayment(loanDTO);
             String cost = calculatorService.calculateLoanCost(loanDTO);
             model.addAttribute("resultsList", resultsCache.addAndShowResults(loanDTO, result, cost));
             model.addAttribute("result", result);
             model.addAttribute("cost", cost);
         } else {
-            model.addAttribute("loanData", loanDTO);
             model.addAllAttributes(exceptionMap);
             model.addAttribute("resultsList", resultsCache.showResults());
         }
+
         return "index";
     }
 }
