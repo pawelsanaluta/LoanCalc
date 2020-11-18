@@ -9,20 +9,22 @@ import java.math.RoundingMode;
 @Service
 public class CalculatorService {
 
+    private final RoundingMode rm = RoundingMode.HALF_UP;
+    private final MathContext mc = new MathContext(10, rm);
+
     public String calculatePayment(LoanDTO loanDTO) {
 
-        Loan loan = Loan.apply(loanDTO);
+        final Loan loan = Loan.apply(loanDTO);
         BigDecimal payment = BigDecimal.valueOf(0);
-        BigDecimal dividend = loan.getLoanAmount();
+        final BigDecimal dividend = loan.getLoanAmount();
         BigDecimal divisor = BigDecimal.valueOf(0);
-        RoundingMode rm = RoundingMode.HALF_UP;
-        MathContext mc = new MathContext(10, rm);
+        final BigDecimal monthlyInterestRate = loan.getInterestRate().divide(BigDecimal.valueOf(1200), 8, rm);
 
-        BigDecimal monthlyInterestRate = loan.getInterestRate().divide(BigDecimal.valueOf(1200), 8, rm);
         for (int i = 1; i <= loan.getPaymentQuantity(); i++) {
-            BigDecimal power = (monthlyInterestRate.add(BigDecimal.valueOf(1))).pow(-i, mc);
+            final BigDecimal power = (monthlyInterestRate.add(BigDecimal.valueOf(1))).pow(-i, mc);
             divisor = divisor.add(power);
         }
+
         try {
             payment = dividend.divide(divisor, 2, rm);
         } catch (ArithmeticException e) {
@@ -32,11 +34,29 @@ public class CalculatorService {
         return payment.toString();
     }
 
-    public String calculateLoanCost(LoanDTO loanDTO) {
+    public String calculateInterestCost(LoanDTO loanDTO) {
 
         final String payment = calculatePayment(loanDTO);
-        BigDecimal cost = new BigDecimal(payment).multiply(new BigDecimal(loanDTO.getPaymentQuantity())).subtract(new BigDecimal(loanDTO.getLoanAmount()));
+        final BigDecimal cost = new BigDecimal(payment)
+                .multiply(new BigDecimal(loanDTO.getPaymentQuantity()))
+                .subtract(new BigDecimal(loanDTO.getLoanAmount()));
 
         return cost.toString();
+    }
+
+    public String calculateCommissionCost(LoanDTO loanDTO) {
+
+        final Loan loan = Loan.apply(loanDTO);
+        final BigDecimal commissionValue = loan.getLoanAmount()
+                .multiply(loan.getCommission().divide(new BigDecimal("100"), 2, rm));
+
+        return commissionValue.toString();
+    }
+
+    public String calculateTotalCost(LoanDTO loanDTO) {
+
+        final BigDecimal totalCost = new BigDecimal(calculateInterestCost(loanDTO)).add(new BigDecimal(calculateCommissionCost(loanDTO)));
+
+        return totalCost.toString();
     }
 }

@@ -1,15 +1,20 @@
 package com.ps.creditcalc;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class LoanDTO {
 
     private String loanAmount;
     private String interestRate;
     private String paymentQuantity;
+    private String commission;
 
-    public LoanDTO(String loanAmount, String interestRate, String paymentQuantity) {
+    public LoanDTO(String loanAmount, String interestRate, String paymentQuantity, String commission) {
         this.loanAmount = loanAmount;
         this.interestRate = interestRate;
         this.paymentQuantity = paymentQuantity;
+        this.commission = commission;
     }
 
     public LoanDTO() {
@@ -27,6 +32,10 @@ public class LoanDTO {
         return paymentQuantity;
     }
 
+    public String getCommission() {
+        return this.commission;
+    }
+
     public void setLoanAmount(String loanAmount) {
         this.loanAmount = loanAmount;
     }
@@ -37,5 +46,9 @@ public class LoanDTO {
 
     public void setPaymentQuantity(String paymentQuantity) {
         this.paymentQuantity = paymentQuantity;
+    }
+
+    public void setCommission(String commission) {
+        this.commission = commission;
     }
 }

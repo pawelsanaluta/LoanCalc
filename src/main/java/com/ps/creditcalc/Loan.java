@@ -10,11 +10,13 @@ public class Loan {
     private BigDecimal loanAmount;
     private BigDecimal interestRate;
     private Integer paymentQuantity;
+    private BigDecimal commission;
 
-    public Loan(BigDecimal loanAmount, BigDecimal interestRate, Integer paymentQuantity) {
+    public Loan(BigDecimal loanAmount, BigDecimal interestRate, Integer paymentQuantity, BigDecimal commission) {
         this.loanAmount = loanAmount;
         this.interestRate = interestRate;
         this.paymentQuantity = paymentQuantity;
+        this.commission = commission;
     }
 
     public Loan() {
@@ -32,6 +34,10 @@ public class Loan {
         this.paymentQuantity = paymentQuantity;
     }
 
+    public void setCommission(BigDecimal commission) {
+        this.commission = commission;
+    }
+
     public BigDecimal getLoanAmount() {
         return this.loanAmount;
     }
@@ -44,11 +50,16 @@ public class Loan {
         return this.paymentQuantity;
     }
 
+    public BigDecimal getCommission() {
+        return this.commission;
+    }
+
     public static Loan apply(LoanDTO loanDTO) {
         final Loan loan = new Loan();
         loan.setLoanAmount(new BigDecimal(loanDTO.getLoanAmount()));
         loan.setInterestRate(new BigDecimal(loanDTO.getInterestRate()));
         loan.setPaymentQuantity(Integer.parseInt(loanDTO.getPaymentQuantity()));
+        loan.setCommission(new BigDecimal(loanDTO.getCommission()));
         return loan;
     }
 }

@@ -38,10 +38,14 @@ public class CalculatorController {
 
         if(exceptionMap.isEmpty()) {
             String result = calculatorService.calculatePayment(loanDTO);
-            String cost = calculatorService.calculateLoanCost(loanDTO);
-            model.addAttribute("resultsList", resultsCache.addAndShowResults(loanDTO, result, cost));
+            String interestCost = calculatorService.calculateInterestCost(loanDTO);
+            String commissionCost = calculatorService.calculateCommissionCost(loanDTO);
+            String totalCost = calculatorService.calculateTotalCost(loanDTO);
+            model.addAttribute("resultsList", resultsCache.addAndShowResults(loanDTO, result, interestCost));
             model.addAttribute("result", result);
-            model.addAttribute("cost", cost);
+            model.addAttribute("interestCost", interestCost);
+            model.addAttribute("commissionCost", commissionCost);
+            model.addAttribute("totalCost", totalCost);
         } else {
             model.addAllAttributes(exceptionMap);
             model.addAttribute("resultsList", resultsCache.showResults());
