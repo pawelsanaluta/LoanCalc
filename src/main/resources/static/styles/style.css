@@ -28,6 +28,10 @@ input {
     background-color: ghostwhite;
 }
 
+.exception {
+    font-size: 0.75em;
+    font-weight: bold
+}
 .header {
     font-size: 1.5em;
     background-color: steelblue;

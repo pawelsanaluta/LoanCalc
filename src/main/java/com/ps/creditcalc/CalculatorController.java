@@ -37,11 +37,14 @@ public class CalculatorController {
         model.addAttribute("loanData", loanDTO);
 
         if(exceptionMap.isEmpty()) {
+            if(loanDTO.getCommission().matches("0")) {
+                loanDTO.setCommission("0");
+            }
             String result = calculatorService.calculatePayment(loanDTO);
             String interestCost = calculatorService.calculateInterestCost(loanDTO);
             String commissionCost = calculatorService.calculateCommissionCost(loanDTO);
             String totalCost = calculatorService.calculateTotalCost(loanDTO);
-            model.addAttribute("resultsList", resultsCache.addAndShowResults(loanDTO, result, interestCost));
+            model.addAttribute("resultsList", resultsCache.addAndShowResults(loanDTO, result, interestCost, totalCost));
             model.addAttribute("result", result);
             model.addAttribute("interestCost", interestCost);
             model.addAttribute("commissionCost", commissionCost);

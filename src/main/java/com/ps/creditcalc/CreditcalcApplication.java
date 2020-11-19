@@ -19,6 +19,4 @@ public class CreditcalcApplication {
 /*TODO
 1. tests
 6. schedule creation, saving to file
-7. 0% percentage exclude
-8. fix commission input- no calc for decimal values, write validator
 */

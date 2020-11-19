@@ -47,15 +47,16 @@ public class CalculatorService {
     public String calculateCommissionCost(LoanDTO loanDTO) {
 
         final Loan loan = Loan.apply(loanDTO);
-        final BigDecimal commissionValue = loan.getLoanAmount()
-                .multiply(loan.getCommission().divide(new BigDecimal("100"), 2, rm));
+        final BigDecimal multiplicand = loan.getCommission().divide(new BigDecimal("100"), 6, rm);
+        final BigDecimal commissionValue = loan.getLoanAmount().multiply(multiplicand).setScale(2, rm);
 
         return commissionValue.toString();
     }
 
     public String calculateTotalCost(LoanDTO loanDTO) {
 
-        final BigDecimal totalCost = new BigDecimal(calculateInterestCost(loanDTO)).add(new BigDecimal(calculateCommissionCost(loanDTO)));
+        final BigDecimal totalCost = new BigDecimal(calculateInterestCost(loanDTO))
+                .add(new BigDecimal(calculateCommissionCost(loanDTO)));
 
         return totalCost.toString();
     }

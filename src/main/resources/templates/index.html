@@ -4,6 +4,23 @@
     <meta charset="UTF-8">
     <title>Loan payment calculator</title>
     <link th:href="@{/styles/style.css}" rel="stylesheet"/>
+
+    <script type='text/javascript'>
+        var timePeriodInMs = 6000;
+        setTimeout(function () {
+            document.getElementById("amountMsg").style.display = "none";
+        }, timePeriodInMs);
+        setTimeout(function () {
+            document.getElementById("rateMsg").style.display = "none";
+        }, timePeriodInMs);
+        setTimeout(function () {
+            document.getElementById("paymentsMsg").style.display = "none";
+        }, timePeriodInMs);
+        setTimeout(function () {
+            document.getElementById("commissionMsg").style.display = "none";
+        }, timePeriodInMs);
+    </script>
+
 </head>
 <body>
 <div th:replace="/fragments/header :: headerFragment"></div>
@@ -15,12 +32,11 @@
 
         <label for="amount">
             <div class="tooltip">Loan amount
-                <span class="tooltiptext">Loan amount between 1000 and 9999999</span>
+                <span class="tooltiptext">Loan amount between 1 000 and 9 999 999</span>
             </div>
         </label><br>
         <input th:field="*{loanAmount}" type="number" id="amount" name="amount"><br>
-        <p style="font-size: 0.75em; font-weight: bold" th:if="${loanAmountValidation}"
-           th:text="${loanAmountValidation}"></p>
+        <div class="exception" id="amountMsg" th:if="${loanAmountValidation}" th:text="${loanAmountValidation}"></div>
 
         <label for="rate">
             <div class="tooltip">Interest rate
@@ -28,7 +44,7 @@
             </div>
         </label><br>
         <input th:field="*{interestRate}" type="number" step="0.01" id="rate" name="rate"><br>
-        <p style="font-size: 0.75em; font-weight: bold" th:if="${interestRate}" th:text="${interestRate}"></p>
+        <div class="exception" id="rateMsg" th:if="${interestRateValidation}" th:text="${interestRateValidation}"></div>
 
         <label for="payments">
             <div class="tooltip">Number of monthly payments
@@ -36,15 +52,16 @@
             </div>
         </label><br>
         <input th:field="*{paymentQuantity}" type="number" id="payments" name="payments"><br>
-        <p style="font-size: 0.75em; font-weight: bold" th:if="${payments}" th:text="${payments}"></p>
+        <div class="exception" id="paymentsMsg" th:if="${paymentsValidation}" th:text="${paymentsValidation}"></div>
 
         <label for="commission">
             <div class="tooltip">Commission rate
-                <span class="tooltiptext">Enter bank's commission in percentage format, leave 0 for no commission</span>
+                <span class="tooltiptext">Enter bank's commission in percentage format, leave empty or 0 for no commission</span>
             </div>
         </label><br>
-        <input th:field="*{commission}" type="number" step="0.01" value="0" id="commission" name="commission"><br>
-        <p style="font-size: 0.75em; font-weight: bold" th:if="${commission}" th:text="${commission}"></p>
+        <input th:field="*{commission}" type="number" step="0.01" id="commission" name="commission"><br>
+        <div class="exception" id="commissionMsg" th:if="${commissionValidation}"
+             th:text="${commissionValidation}"></div>
 
         <button>Calculate!</button>
     </form>
@@ -69,7 +86,7 @@
     <p th:if="${resultsList != null && resultsList.size() != 0}">
         Previous calculations:</p>
     <ul style="list-style: none; text-align: center; padding-left: 0">
-        <li style="" th:each="item : ${resultsList}" th:text="${item}"></li>
+        <li style="margin-bottom: 10px" th:each="item : ${resultsList}" th:text="${item}"></li>
     </ul>
 </div>
 </body>

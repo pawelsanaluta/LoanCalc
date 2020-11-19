@@ -11,12 +11,13 @@ public class ResultsCache {
 
     private final List<String> results = new LinkedList<>();
 
-    public List<String> addAndShowResults(LoanDTO loanDTO, String result, String cost) {
+    public List<String> addAndShowResults(LoanDTO loanDTO, String result, String interestCost, String totalCost) {
         String entry = "Amount: " + loanDTO.getLoanAmount() +
                 ", interest rate: " + loanDTO.getInterestRate() +
                 "%, duration: " + loanDTO.getPaymentQuantity() +
                 " months, monthly payment: " + result +
-                ", loan cost: " + cost;
+                ", interest cost: " + interestCost +
+                ", total cost: " + totalCost;
 
         Collections.reverse(results);
         results.add(entry);
